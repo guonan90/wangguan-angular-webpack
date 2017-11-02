@@ -1,0 +1,23 @@
+.fl-right {
+    float: right;
+}
+
+.fl-left {
+    float: left;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.required_red{
+    color: red;
+}

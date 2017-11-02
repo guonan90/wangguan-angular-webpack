@@ -1,0 +1,148 @@
+<div class="lysz_content">
+    <div class="common_header">
+        <p>路由设置</p>
+    </div>
+    <div class="lysz_list">
+        <ol class="clearfix">
+            <li class="lysz_list_allselect">
+                <input type="checkbox" ng-model="selectAll" ng-click="selected(selectAll)" />
+                <span>全选</span>
+            </li>
+            <li>路径</li>
+            <li>应用</li>
+            <li>URL地址</li>
+            <li>URL地址显示前缀</li>
+            <li>是否支持重试</li>
+            <li>过滤请求头信息</li>
+            <li>是否启用</li>
+            <li>操作</li>
+        </ol>
+        <div class="lysz_list_ul">
+            <ul ng-repeat="route in routes">
+                <!-- value="{{route.id}}" -->
+                <li>
+                    <input type="checkbox" ng-model="route.check" ng-checked="route.check" />
+                </li>
+                <li>{{route.path}}</li>
+                <li>{{route.serviceId}}</li>
+                <li>{{route.url}}</li>
+                <li ng-if="route.stripPrefix">是</li>
+                <li ng-if="!route.stripPrefix">否</li>
+                <li ng-if="route.retryable">是</li>
+                <li ng-if="!route.retryable">否</li>
+                <li>{{route.sensitiveHeaders}}</li>
+                <li ng-if="route.enabled">是</li>
+                <li ng-if="!route.enabled">否</li>
+                <li>
+                    <span ng-if="route.enabled" title="禁用" ng-click="enable(route.id,false)">
+                        <i class="iconfont iconfont-router">&#xe647;</i>
+                    </span>
+                    <span ng-if="!route.enabled" title="启用" ng-click="enable(route.id,true)">
+                        <i class="iconfont iconfont-router">&#xe614;</i>
+                    </span>
+                    <span class="lysz_list_r" ng-click="updateRoute(route)">
+                        <i class="iconfont iconfont-router">&#xe649;</i>
+                    </span>
+                    <span class="lysz_list_x" ng-click="delete(route.id)">
+                        <i class="iconfont iconfont-router">&#xe600;</i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <nav id="nav_pagination" aria-label="Page navigation">
+        <ul class="pagination"></ul>
+        <div class="clearfix:after"></div>
+    </nav>
+
+
+    <div class="common_btn">
+        <button class="btn btn-success lysz_add_btn" ng-click="addRoute()">增加</button>
+        <button class="btn btn-danger lysz_remove_btn" ng-click="deleteBatch()">批量删除</button>
+        <div class="clearfix:after"></div>
+    </div>
+
+
+
+
+
+
+    <!-- 弹出修改 -->
+    <div class="shade"></div>
+    <form name="myForm" >
+        <div class="common_popUp lysz_popUp">
+            <input type="hidden" name="id" ng-model="route.id" ng-value="">
+            <h1>增加路由设置信息</h1>
+            <div class="common_pop_content">
+
+                <p><span class="required_red"></span> 路径：</p>
+                <input type="text" name="path" value="" class="lysz_data_a" ng-model="route.path" required placeholder="必填项" />
+                <!-- <span style="color:red" ng-show="myForm.path.$dirty && myForm.path.$invalid">
+                    <span ng-show="myForm.path.$error.required">路径是必须的</span>
+                </span> -->
+
+                <p><span class="required_red"></span> 是否启用：</p>
+                <select name="enabled" id="" class="lysz_data_b" 
+                ng-model="route.enabled" ng-options="c.key as c.name   for c in CHOOSE" required>
+                    <option value="">--请选择--</option>
+                    <!-- <option value="false">否</option> -->
+                </select>
+                <!-- <span style="color:red" ng-show="myForm.enabled.$dirty && myForm.enabled.$invalid">
+                    <span ng-show="myForm.enabled.$error.required">是否启用是必选的</span>
+                </span> -->
+
+                <p><span class="required_red"></span> 选择路由类型：</p>
+                <select name="" id="" class="lysz_data_c" ng-model="selectValue" ng-change="serverChange(selectValue)" ng-options="s.key as s.name for s in servers" required>
+                    <option value="">-- 请选择 --</option>
+                    <!-- <option value="0" ng-selected="!serverSelect">服务</option>
+                <option value="1" ng-selected="serverSelect">URL</option> -->
+                </select>
+
+                <p>服务名称(id)：</p>
+                <!-- <select name="" id="" class="lysz_data_d" ng-model="route.serviceId" ng-disabled="!disable"> -->
+                <select type="text" class="lysz_data_d" id="serviceId" name="serviceId" value="" ng-model="route.serviceId" ng-options="mapping.serviceId as mapping.serviceId  for mapping in mappings"
+                    ng-disabled="!disable" >
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <!-- <option>--请选择--</option> -->
+                <!-- </select> -->
+
+                <p>URL地址：</p>
+                <input ng-model="route.url" ng-value="" id="url" name="url" type="url" class="lysz_data_aa" ng-disabled="disable" placeholder="路由类型为URL则必填" 
+                />
+
+
+                <p>请求方法：</p>
+                <select type="text" class="lysz_data_dd" id="requestMethod" name="requestMethod" value="" ng-model="route.requestMethod"
+                    ng-options="requestMethod.key as requestMethod.key   for requestMethod in requestMethods" ng-disabled="disable" >
+                    <option value="">-- 请选择 --</option>
+                </select>
+
+                <p><span class="required_red"></span> URL地址显示前缀：</p>
+                <select name="" id="" class="lysz_data_e" ng-model="route.stripPrefix" ng-options="c.key as c.name   for c in CHOOSE" required>
+                    <option value="">--请选择--</option>
+                </select>
+                <!-- <option value="true" >是</option> -->
+                <!-- <option value="false">否</option> -->
+                <!-- </select> -->
+
+                <p><span class="required_red"></span> 是否支持重试：</p>
+                <select name="" id="" class="lysz_data_f" ng-model="route.retryable" ng-options="c.key as c.name   for c in CHOOSE" required>
+                    <option value="">--请选择--</option>
+                </select>
+                <!-- <option value="true">是</option>
+                <option value="false">否</option>
+            </select> -->
+
+                <p><span class="required_red"></span> 请求头过滤：</p>
+                <input type="text" name="" value="" class="lysz_data_g" ng-model="route.sensitiveHeaders" ng-value=""  />
+            </div>
+            <div class="common_pop_btn">
+                <button class="btn btn-success lysz_pop_r" ng-click="save()">提交</button>
+                <button class="btn common_pop_x" ng-click="concel()">取消</button>
+            </div>
+        </div>
+    </form>
+
+</div>

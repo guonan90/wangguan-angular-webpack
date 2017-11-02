@@ -1,0 +1,132 @@
+
+
+<div class="chart_content">
+    <div class="common_header">
+        <p>启动设置</p>
+    </div>
+    <div class="chart_list">
+        <ol class="clearfix">
+            <li>模块名称</li>
+            <li>允许启动个数</li>
+            <li>已启动</li>
+            <li>可启动</li>
+            <li>启动</li>
+        </ol>
+        <div class="chart_list_ul">
+            <ul>
+                <li>网关加解密</li>
+                <li>3</li>
+                <li>{{result.DIGITALBOX}}</li>
+                <li>{{3-result.DIGITALBOX}}</li>
+                <li>
+                    <i class="iconfont iconfont-router" ng-disabled="(3-result.DIGITALBOX)==0" ng-click="showStart('gatewayCrypto')">&#xe6b9;</i>
+                </li>
+            </ul>
+        </div>
+        <div class="chart_list_ul">
+            <ul>
+                <li>网关核心模块</li>
+                <li>3</li>
+                <li>{{result.PROCESSMODULE}}</li>
+                <li>{{3-result.PROCESSMODULE}}</li>
+                <li>
+                    <i class="iconfont iconfont-router" ng-disabled="(3-result.PROCESSMODULE)==0" ng-click="showStart('gatewayCore')">&#xe6b9;</i>
+                </li>
+            </ul>
+        </div>
+        <div class="chart_list_ul">
+            <ul>
+                <li>网关</li>
+                <li>3</li>
+                <li>{{result.GATEWAY}}</li>
+                <li>{{3-result.GATEWAY}}</li>
+                <li>
+                    <i class="iconfont iconfont-router" ng-disabled="(3-result.GATEWAY)==0" ng-click="showStart('gateway')">&#xe6b9;</i>
+                </li>
+            </ul>
+        </div>
+        <div class="chart_list_ul">
+            <ul>
+                <li>其他</li>
+                <li></li>
+                <li>{{result.OTHERSERVER}}</li>
+                <li></li>
+                <li>
+                    <!-- <i class="iconfont iconfont-router">&#xe6b9;</i> -->
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="chart_btn">
+        <button class="btn btn-success chart_add_btn" ng-click="showStart()" ng-disabled="!disabled">全部启动</button>
+        <button class="btn btn-danger chart_remove_btn" ng-click="stopServer()" ng-disabled="disabled">全部停止</button>
+    </div>
+
+    <div class="chart_echarts">
+        <div id="pic1" class="chart_echarts_left">
+            <!-- <p>内存使用率</p> -->
+        </div>
+        <div id="pic2" class="chart_echarts_right">
+            <!-- <p>内存使用率</p>                     -->
+        </div>
+    </div>
+
+
+    <!-- 点击启动 -->
+    <div class="shade"></div>
+    <form name="myForm">
+
+        <div class="common_popUp chart_add">
+            <h1>启动设置</h1>
+            <div class="common_pop_content chart_add_content">
+                <div ng-show="showgatewayCrypto">
+                    <p>网关加解密模块启动数量：</p>
+                    <select type="text" class="" id="gatewayCrypto" name="gatewayCrypto" value="" ng-model="gateway.gatewayCrypto">
+                        <option ng-value="">-- 请选择 --</option>
+                        <option ng-value="1">-- 1 --</option>
+                        <option ng-value="2">-- 2 --</option>
+                        <option ng-value="3">-- 3 --</option>
+                    </select>
+                </div>
+
+                <div ng-show="showgatewayCore">
+                    <p>网关核心模块启动数量：</p>
+                    <select type="text" class="" id="gatewayCore" name="gatewayCore" value="" ng-model="gateway.gatewayCore">
+                        <option ng-value="">-- 请选择 --</option>
+                        <option ng-value="1">-- 1 --</option>
+                        <option ng-value="2">-- 2 --</option>
+                        <option ng-value="3">-- 3 --</option>
+                    </select>
+                </div>
+
+                <div ng-show="showgateway">
+                    <p> 网关模块启动数量：</p>
+                    <select type="text" class="" id="gateway" name="gateway" value="" ng-model="gateway.gateway" ng-change="showInput(gateway.gateway)">
+                        <option ng-value="">-- 请选择 --</option>
+                        <option ng-value="1">-- 1 --</option>
+                        <option ng-value="2">-- 2 --</option>
+                        <option ng-value="3">-- 3 --</option>
+                    </select>
+
+                    <p>网关端口1：</p>
+                    <input id="port1" name="port" type="text" class="form-data" />
+                    <p ng-show="showPort2">网关端口2：</p>
+                    <input ng-show="showPort2" id="port2" name="port" type="text" class="form-data" />
+                    <p ng-show="showPort3">网关端口3：</p>
+                    <input ng-show="showPort3" id="port3" name="port" type="text" class="form-data" />
+                </div>
+            </div>
+
+            <div class="common_pop_btn">
+                <button class="btn btn-success kfzgl_pop_r" ng-click="startServer()">提交</button>
+                <button class="btn common_pop_x" ng-click="concel()">取消</button>
+            </div>
+        </div>
+    </form>
+
+
+
+
+</div>

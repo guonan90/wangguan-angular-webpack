@@ -1,0 +1,119 @@
+<!-- <div class="celueguanli">策略管理</div> -->
+
+<div class="clgl_content">
+    <div class="common_header">
+        <p>策略管理</p>
+    </div>
+    <div class="clgl_list">
+        <ol class="clearfix">
+            <li class="lysz_list_allselect">
+                <input type="checkbox" ng-model="selectAll" ng-click="selected(selectAll)" />
+                <span>全选</span>
+            </li>
+            <li>策略类型</li>
+            <li>服务地址</li>
+            <li>账户</li>
+            <li>源地址</li>
+            <li>最大访问量</li>
+            <li>刷新时间间隔</li>
+            <li>操作</li>
+        </ol>
+        <div class="clgl_list_ul">
+            <ul ng-repeat="eachPolicy in policyList" ng-class="{success: $index%2==0, active:$index%2==1}">
+                <li>
+                    <input type="checkbox" ng-model="eachPolicy.check" ng-checked="eachPolicy.check" />
+                </li>
+                <!-- <li>服务地址</li>
+                <li>www.baidubaidubaidubaidu.com</li>
+                <li>wojiaogoudan@163.com</li>
+                <li>sFgyhjjkmjlu</li>
+                <li>100</li>
+                <li>60</li> -->
+                <li ng-if="eachPolicy.type == 'ORIGIN'" class="text-center">源地址</li>
+                <li ng-if="eachPolicy.type == 'USER'" class="text-center">用户</li>
+                <li ng-if="eachPolicy.type == 'URL'" class="text-center">服务地址</li>
+                <li ng-if="eachPolicy.type == 'MULTI'" class="text-center">混合方式</li>
+                <li class="text-left" ng-bind="eachPolicy.routeService+'----'+eachPolicy.routePath+'----'+eachPolicy.mappingPath+'----'+eachPolicy.mappingMethod"></li>
+                <li class="text-left" ng-bind="eachPolicy.accessKey"></li>
+                <li class="text-left" ng-bind="eachPolicy.remoteAddress"></li>
+                <li class="text-left" ng-bind="eachPolicy.limit"></li>
+                <li class="text-left" ng-bind="eachPolicy.refresh"></li>
+                <li>
+                    <span class="clgl_list_r" ng-click="updatePolicy(eachPolicy)">
+                        <i class="iconfont iconfont-router">&#xe649;</i>
+                    </span>
+                    <span class="clgl_list_x"    ng-click="deletePolicy(eachPolicy.id)">
+                        <i class="iconfont iconfont-router">&#xe600;</i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <nav id="nav_pagination" aria-label="Page navigation">
+        <ul class="pagination"></ul>
+        <div class="clearfix:after"></div>
+    </nav>
+
+    <div class="common_btn">
+        <button class="btn btn-success clgl_add_btn" ng-click="addPolicy()">增加</button>
+        <button class="btn btn-danger clgl_remove_btn" ng-click="deleteBatchPolicy()">批量删除</button>
+    </div>
+
+
+    <div class="shade"></div>
+    <form name="myForm" >
+        
+    <div class="common_popUp clgl_popUp">
+        <h1>增加策略管理信息</h1>
+        <div class="common_pop_content">
+            <input type="hidden" name="id" ng-model="policy.id" ng-value="" >
+            <div>
+                <p>策略类型：</p>
+                <select id="type" name="" value="" ng-model="policy.type" ng-options="eachPolicyType.key as eachPolicyType.name for eachPolicyType in policyType"
+                    ng-change="showOption(policy.type)" required>
+                    <option value="">-- 请选择 --</option>
+                </select>
+            </div>
+
+            <div id="appChoice" name="appChoice" style="display: none">
+                <p>应 用</p>
+                <select type="text" class="" id="route" name="route" value="" ng-model="policy.route" ng-options="route as route.serviceId+'    '+route.path for route in routes"
+                    ng-change="loadMapping(policy.route)" >
+                    <option value="">-- 请选择 --</option>
+                </select>
+            </div>
+
+            <div id="serviceChoice" name="serviceChoice" style="display: none">
+                <p> 服 务 </p>
+                <select type="text" class="" id="mapping" name="mapping" value="" ng-model="policy.mapping" ng-options="mapping as mapping.requestMethod+'    '+mapping.path for mapping in mappings" >
+                    <option value="">-- 请选择 --</option>
+                </select>
+            </div>
+
+            <div id="userChoice" name="userChoice" style="display: none">
+                <p>用 户</p>
+                <select type="text" class="" id="developer" name="developer" value="" ng-model="policy.developer" ng-options="developer as developer.accessKey+'    '+developer.remark for developer in developers" >
+                    <option value="">-- 请选择 --</option>
+                </select>
+            </div>
+
+            <div class="" id="originChoice" name="originChoice" style="display: none">
+                <p>源地址</p>
+                <input ng-model="policy.remoteAddress" ng-value="" id="originAddress" name="originAddress" type="text" class="" />
+            </div>
+
+            <p>最大访问量：</p>
+            <input ng-model="policy.limit" ng-value="" id="refresh" name="refresh" type="text" class="" required/>
+
+            <p>刷新时间间隔：</p>
+            <input ng-model="policy.refresh" ng-value="" id="limit" name="limit" type="text" class="form-data" required/>
+        </div>
+        <div class="common_pop_btn">
+            <button class="btn btn-success clgl_pop_r" ng-click="save()">提交</button>
+            <button class="btn common_pop_x" ng-click="concel()">取消</button>
+        </div>
+    </div>
+</form>
+
+</div>

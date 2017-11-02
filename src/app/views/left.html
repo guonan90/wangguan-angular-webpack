@@ -1,0 +1,136 @@
+<!--
+<div class="sidebar responsive">
+    <div class="panel-group" id="panel-service">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-service"
+                   href="#route-setting">路由设置</a>
+            </div>
+            <div id="route-setting" class="panel-collapse collapse">
+                &lt;!&ndash;onclick="javascript:window.location.href='index.html'">&ndash;&gt;
+                &lt;!&ndash;<div ui-sref-active="active" class="panel-body">&ndash;&gt;
+                <div class="panel-body">
+                <span ui-sref="index.routing">
+                    路由管理</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-service"
+                   href="#developer-setting">开发者管理</a>
+            </div>
+            <div id="developer-setting" class="panel-collapse collapse">
+                &lt;!&ndash;onclick="javascript:window.location.href='index.html'">&ndash;&gt;
+                <div class="panel-body">
+                <span ui-sref="index.developer">
+                     开发者管理</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-service"
+                   href="#service-setting">服务设置</a>
+            </div>
+            <div id="service-setting" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <span ui-sref="index.mapping">
+                    地址采集</span>
+                </div>
+                <div class="panel-body">
+                    <span ui-sref="index.skipMapping">
+                    透传地址</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-service"
+               href="#authentication-setting">权限设置</a>
+        </div>
+        <div id="authentication-setting" class="panel-collapse collapse">
+            <div class="panel-body">
+                    <span ui-sref="index.resources">
+                    资源管理</span>
+            </div>
+            <div class="panel-body">
+                    <span ui-sref="index.authentication">
+                    授权服务</span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-service"
+               href="#ratelimit-setting">限速设置</a>
+        </div>
+        <div id="ratelimit-setting" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span ui-sref="index.ratelimit">策略管理</span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-service"
+               href="#start-setting">启动设置</a>
+        </div>
+        <div id="start-setting" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span ui-sref="index.start">启动</span>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="aside_content">
+
+    <!-- 左侧导航 -->
+    <div class="content-left">
+
+        <!-- 左侧导航-路由设置 -->
+        <div class="content-left-lysz content-left-common">
+            <div>路由设置</div>
+            <!--<a href="#/lysz" class="content-left-a content-left-lysz-a">路由设置</a>-->
+            <a ui-sref="index.routing" class="content-left-a content-left-lysz-a">路由设置</a>
+        </div>
+
+        <!-- 左侧导航-开发者管理 -->
+        <div class="content-left-kfzgl content-left-common">
+            <div>开发者管理</div>
+            <a ui-sref="index.developer" class="content-left-a content-left-kfzgl-a">开发者管理</a>
+        </div>
+
+        <!-- 左侧导航-服务设置 -->
+        <div class="content-left-fwsz content-left-common">
+            <div>服务设置</div>
+            <a ui-sref="index.mapping" class="content-left-a content-left-dzcj-a">地址采集</a>
+            <a ui-sref="index.skipMapping" class="content-left-a content-left-tcdz-a">透传地址</a>
+        </div>
+
+        <!-- 左侧导航-权限设置 -->
+        <div class="content-left-qxsz content-left-common">
+            <div>权限设置</div>
+            <a ui-sref="index.resources" class="content-left-a content-left-zygl-a">资源管理</a>
+            <a ui-sref="index.authentication" class="content-left-a content-left-sqfw-a">授权服务</a>
+        </div>
+
+        <!-- 左侧导航-限速设置 -->
+        <div class="content-left-xssz content-left-common">
+            <div>限速设置</div>
+            <a ui-sref="index.ratelimit" class="content-left-a content-left-clgl-a">策略管理</a>
+        </div>
+
+        <!-- 左侧导航-新增图表 -->
+        <div class="content-left-xssz content-left-common">
+            <div>系统信息</div>
+            <a ui-sref="index.serverInfo" class="content-left-a content-left-clgl-a">启动设置</a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,211 @@
+<!-- <div class="ziyuanguanli">资源管理</div> -->
+
+<div class="zygl_content">
+    <div class="common_header">
+        <p>资源管理</p>
+    </div>
+    <div class="zygl_list">
+        <ol class="clearfix">
+            <li class="lysz_list_allselect">
+                <input type="checkbox" ng-model="selectAll" ng-click="selected(selectAll)" />
+                <span>全选</span>
+            </li>
+            <li>资源名称</li>
+            <li>操作</li>
+        </ol>
+        <div class="zygl_list_ul">
+            <ul ng-repeat="resources in resourcess" ng-class="{success: $index%2==0, active:$index%2==1}">
+                <li>
+                    <input type="checkbox" ng-model="resources.check" ng-checked="resources.check" />
+                </li>
+
+                <li>{{resources.resourceName}}</li>
+                <li>
+                    <span class="zygl_list_r" ng-click="details(resources.id)">
+                        <i class="iconfont iconfont-router">&#xe607;</i>
+                    </span>
+                    <span class="zygl_list_r" ng-click="editItem(resources)">
+                        <i class="iconfont iconfont-router">&#xe649;</i>
+                    </span>
+                    <span class="zygl_list_x" ng-click="deleteResources(resources.id)">
+                        <i class="iconfont iconfont-router">&#xe600;</i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <nav id="nav_pagination" aria-label="Page navigation">
+        <ul class="pagination"></ul>
+        <div class="clearfix:after"></div>
+    </nav>
+
+    <div class="common_btn">
+        <button class="btn btn-success zygl_add_btn" ng-click="addResources()">增加</button>
+        <button class="btn btn-danger zygl_remove_btn" ng-click="deleteBatchResources()">批量删除</button>
+    </div>
+
+
+    <div class="shade"></div>
+    <!-- 弹出增加 -->
+    <!-- <div class="common_popUp zygl_popUp">
+        <div class="zygl_popUp_search">
+            <h1>增加资源管理信息</h1> -->
+    <!-- <input type="text" class="zygl_popUp_search" placeholder="请输入搜索的资源名称"> -->
+    <!-- </div>
+        <div class="common_pop_content"> -->
+    <!-- <div class="zygl_data_add">
+                <p>请输入要搜索的资源名称:</p>
+                <input type="text" name="" value="" class="zygl_data_a" placeholder="请输入要搜索的资源名称"/>
+            </div> -->
+    <!-- <form name="resourceForm">
+                <div class="zygl_add">
+
+                    <input type="hidden" name="id" ng-model="resources.id" ng-value="">
+                    <div class="zygl_add_left">
+                        <p>资源名称:</p>
+                        <input type="text" name="" value="" class="zygl_data_a" placeholder="请输入增加的资源名称" ng-model="resources.resourceName" ng-value=""
+                            id="resourceName" name="resourceName" required="required" />
+                        <p>选择地址授权:</p>
+                        <div class="common_pop_content_menu">
+                            <div ng-repeat="node in nodes" ng-if="node.pid==null">
+                                <h5>
+                                    <input type="checkbox" ng-model="parentCheck" ng-checked="node.check"  ng-click="parentChecked(parentCheck,node)">
+                                    <i class="common_pop_content_i" ng-click="parentChecked('',node)">{{node.name}}</i>
+                                </h5>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="zygl_add_right">
+                        <div ng-repeat="rightDivdata in rightDivdatas">
+                            <input type="checkbox" ng-model="rightDivdata.check" ng-checked="rightDivdata.check">
+                            <span>{{rightDivdata.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="common_pop_btn">
+            <button class="btn btn-success zygl_pop_r" ng-click="save()">提交</button>
+            <button class="btn common_pop_x" ng-click="concel()">取消</button>
+        </div>
+    </div> -->
+
+    <!-- 第二种样式 -->
+    
+    <div class="common_popUp zygl_popUp">
+        <div class="zygl_popUp_search">
+            <h1>增加资源管理信息</h1>
+        </div>
+        <div class="common_pop_content">
+            <form name="resourceForm" >
+                    <input type="hidden" name="id" ng-model="resources.id" ng-value="">
+                <div class="zygl_add">
+                    <div class="modal-body resources_modal-body">
+                        <div class="col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <span class="fa fa-home">
+                                            <p>资源名称:</p>
+                                            <input type="text"  value="" class="zygl_data_a" placeholder="请输入增加的资源名称" ng-model="resources.resourceName" ng-value=""
+                                                id="resourceName" name="resourceName" required="required" />
+                                        </span>
+                                    </h3>
+                                </div>
+
+                                <div class="panel-body">
+                                    <table class="table   table-bordered  table-hover mapping" auikit-table>
+                                        <div class="zygl_add_left">
+                                            <p>选择地址授权:</p>
+                                            <div class="common_pop_content_menu">
+                                                <div ng-repeat="node in nodes" ng-if="node.pid==null">
+                                                    <h5>
+                                                        <input type="checkbox" ng-checked="node.check" ng-model="parentCheck" ng-click="parentChecked(parentCheck,node)">
+                                                        <i class="common_pop_content_i" ng-click="parentChecked('',node)">{{node.name}}</i>
+                                                    </h5>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="zygl_add_right">
+                                            <div ng-repeat="rightDivdata in rightDivdatas">
+                                                <input type="checkbox" ng-model="rightDivdata.check" ng-checked="rightDivdata.check">
+                                                <span>{{rightDivdata.name}}</span>
+                                            </div>
+                                        </div>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+
+        <div class="common_pop_btn">
+            <button class="btn btn-success zygl_pop_r" ng-click="save()">提交</button>
+            <button class="btn common_pop_x" ng-click="concel()">取消</button>
+        </div>
+    </div>
+
+
+
+    <!-- 弹出数据详细信息 -->
+    <div class="common_popUp_resources zygl_popUp">
+        <div class="zygl_popUp_search">
+            <h1>资源管理信息</h1>
+        </div>
+
+        <div class="common_pop_content">
+            <div class="zygl_add">
+                <div class="modal-body resources_modal-body">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <span class="fa fa-home">详细信息</span>
+                                </h3>
+                            </div>
+
+                            <div class="panel-body">
+                                <table class="table   table-bordered  table-hover mapping" auikit-table>
+                                    <thead>
+                                        <tr>
+                                            <th class="center">资源名称</th>
+                                            <th class="center">应用名称</th>
+                                            <th class="center">路径</th>
+                                            <th class="center">请求方式（HTTP）</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="" ng-repeat="detailsData in detailsDatas">
+                                            <td class="center">{{detailsData.resource_name}}</td>
+                                            <td class="center">{{detailsData.service_id}}</td>
+                                            <td class="center">{{detailsData.path}}</td>
+                                            <td class="center">{{detailsData.request_method}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="common_pop_btn">
+            <button class="btn common_pop_x" ng-click="concel()">关闭</button>
+        </div>
+
+    </div>
+
+</div>

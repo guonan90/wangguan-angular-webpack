@@ -1,0 +1,96 @@
+<!-- <div class="kaifazheguanli">开发者管理</div> -->
+<div class="kfzgl_content">
+    <div class="common_header">
+        <p>开发者管理</p>
+    </div>
+    <div class="kfzgl_list">
+        <ol class="clearfix">
+            <li class="lysz_list_allselect">
+                <input type="checkbox" ng-model="selectAll" ng-click="selected(selectAll)" />
+                <span>全选</span>
+            </li>
+            <li>用户ID</li>
+            <li>备注</li>
+            <li>AccessKey</li>
+            <li>SecretKey</li>
+            <li>用户类型</li>
+            <li>服务名称(服务提供)</li>
+            <li>操作</li>
+        </ol>
+        <div class="kfzgl_list_ul">
+            <ul ng-repeat="developer in developers" ng-class="{success: $index%2==0, active:$index%2==1}">
+                <li>
+                    <input type="checkbox" ng-model="developer.check" ng-checked="developer.check" />
+                </li>
+                <li>{{developer.uid}}</li>
+                <li>{{developer.remark}}</li>
+                <li>{{developer.accessKey}}</li>
+                <li>{{developer.secretKey}}</li>
+                <li>{{getDeveloperName(developer.type)}}</li>
+                <li>{{developer.serviceId}}</li>
+                <li>
+                    <!-- <span ng-if="route.enabled" title="禁用" ng-click="enable(route.id,false)">
+                        <i class="iconfont iconfont-router">&#xe647;</i>
+                    </span>
+                    <span ng-if="!route.enabled" title="启用" ng-click="enable(route.id,true)">
+                        <i class="iconfont iconfont-router">&#xe614;</i>
+                    </span> -->
+                    <span class="kfzgl_list_r" ng-click="editItem(developer)">
+                        <i class="iconfont iconfont-router">&#xe649;</i>
+                    </span>
+                    <span class="kfzgl_list_x" ng-click="deleteDeveloper(developer.id)">
+                        <i class="iconfont iconfont-router">&#xe600;</i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <nav id="nav_pagination" aria-label="Page navigation">
+        <ul class="pagination"></ul>
+        <div class="clearfix:after"></div>
+    </nav>
+
+    <div class="common_btn">
+        <button class="btn btn-success kfzgl_add_btn" ng-click="addDeveloper()">增加</button>
+        <button class="btn btn-danger kfzgl_remove_btn" ng-click="deleteBatchDeveloper()">批量删除</button>
+    </div>
+
+
+    <div class="shade"></div>
+    <form name="myForm" >
+        <div class="common_popUp kfzgl_popUp">
+            <h1>增加开发者管理信息</h1>
+            <div class="common_pop_content">
+                <input id="developeId" type="hidden" name="id" ng-model="developer.id" ng-value="id" >
+
+                <p>用户中心UID：</p>
+                <!-- <input type="text" name="" value="" class="kfzgl_data_a" /> -->
+                <input ng-model="developer.uid" ng-value="" id="uid" name="uid" type="text" class="kfzgl_data_a" required/>
+
+                <p>备注：</p>
+                <!-- <input type="text" name="" value="" class="kfzgl_data_b" /> -->
+                <input ng-model="developer.remark" ng-value="" id="remark" name="remark" type="text" class="kfzgl_data_b" required/>
+                <p>用户类型：</p>
+                <!-- <select name="" id="" class="kfzgl_data_c">
+                <option>--请选择--</option>
+                <option>服务开发者</option>
+                <option>应用开发者</option>
+            </select> -->
+                <select type="text" class="kfzgl_data_c" id="type" name="type" ng-model="developer.type" ng-change="developetypeChange(developer.type)"
+                    ng-options="developerType.key as developerType.name   for developerType in developerTypes" required>
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <p>服务名称：</p>
+                <!-- <input type="text" name="" value="" class="kfzgl_data_d" /> -->
+                <input ng-model="developer.serviceId" ng-value="" id="serviceId" name="serviceId" type="text" class="kfzgl_data_d" ng-disabled="disable"
+                    required/>
+            </div>
+            <div class="common_pop_btn">
+                <button class="btn btn-success kfzgl_pop_r" ng-click="updateDeveloper()">提交</button>
+                <button class="btn common_pop_x" ng-click="concel()">取消</button>
+            </div>
+        </div>
+    </form>
+
+</div>

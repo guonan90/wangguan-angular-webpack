@@ -1,0 +1,85 @@
+<!-- <div class="touchuandizhi">透传地址</div> -->
+
+<div class="tcdz_content">
+    <div class="common_header">
+        <p>透传地址</p>
+    </div>
+    <div class="tcdz_list">
+        <ol class="clearfix">
+            <li class="lysz_list_allselect">
+                <input type="checkbox" ng-model="selectAll" ng-click="selected(selectAll)" />
+                <span>全选</span>
+            </li>
+            <li>路由地址</li>
+            <li>透传地址</li>
+            <li>请求方式(HTTP)</li>
+            <li>操作</li>
+        </ol>
+        <div class="tcdz_list_ul">
+            <ul ng-repeat="skipMapping in skipMappings" ng-class="{success: $index%2==0, active:$index%2==1}">
+                <li>
+                    <input type="checkbox" ng-model="skipMapping.check" ng-checked="skipMapping.check" />
+                </li>
+                <li>{{skipMapping.routePath}}</li>
+                <li>{{skipMapping.skipPath}}</li>
+                <li>{{skipMapping.requestMethod}}</li>
+                <li>
+                    <span class="tcdz_list_r" ng-click="editItem(skipMapping)">
+                        <i class="iconfont iconfont-router">&#xe649;</i>
+                    </span>
+                    <span class="tcdz_list_x" ng-click="deleteSkipMapping(skipMapping.id)">
+                        <i class="iconfont iconfont-router">&#xe600;</i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <nav id="nav_pagination" aria-label="Page navigation">
+        <ul class="pagination"></ul>
+        <div class="clearfix:after"></div>
+    </nav>
+
+    <div class="common_btn">
+        <button class="btn btn-success tcdz_add_btn" ng-click="addSkipMapping()">增加</button>
+        <button class="btn btn-danger tcdz_remove_btn" ng-click="deleteBatchSkipMapping()">批量删除</button>
+    </div>
+
+
+    <div class="shade"></div>
+    <form name="myForm" >
+
+        <div class="common_popUp tcdz_popUp">
+            <h1>增加透传地址信息</h1>
+            <div class="common_pop_content">
+                <input type="hidden" name="id" ng-model="skipMapping.id" ng-value="" >
+                <p>路由地址：</p>
+                <!-- <select name="" id="" class="tcdz_data_a">
+                <option>--请选择--</option>
+            </select> -->
+                <select type="text" class="tcdz_data_a" id="routeId" name="routeId" value="" ng-model="skipMapping.route" ng-options="route as route.path for route in routes" required>
+                    <!--ng-change="getSelectData(skipMapping.route)"-->
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <p>透传地址：</p>
+                <!-- <input type="text" name="" value="" class="tcdz_data_b" /> -->
+                <input ng-model="skipMapping.skipPath" ng-value="" id="skipPath" name="skipPath" type="text" class="tcdz_data_b" required/>
+                <p>请求方法：</p>
+                <!-- <select name="" id="" class="tcdz_data_c">
+                <option>--请选择--</option>
+                <option>POST</option>
+                <option>GET</option>
+            </select> -->
+                <select type="text" class="tcdz_data_c" id="requestMethod" name="requestMethod" value="" ng-model="skipMapping.requestMethod"
+                    ng-options="requestMethod.key as requestMethod.key   for requestMethod in requestMethods" required>
+                    <option value="">-- 请选择 --</option>
+                </select>
+            </div>
+            <div class="common_pop_btn">
+                <button class="btn btn-success tcdz_pop_r" ng-click="save()">提交</button>
+                <button class="btn common_pop_x" ng-click="concel()">取消</button>
+            </div>
+        </div>
+    </form>
+
+</div>

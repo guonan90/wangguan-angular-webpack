@@ -1,0 +1,81 @@
+.aside {
+    height: 100%;
+    float: left;
+}
+.aside_content {
+    height: 100%;
+    overflow: hidden;
+    padding-top: 70px;
+    position: absolute;
+
+    /* 左侧导航 */
+    .content-left{
+        width: 240px;
+        height: 100%;
+        background: #0083d3;
+        float: left;
+        color: #fff;
+        .content-left-common {
+            width: 240px;
+            div {
+                width: 240px;
+                border-left: 8px solid #d5d5d5;
+                background: #016daf;
+                font-size: 20px;
+                text-align: center;
+                cursor: pointer;
+                height: 46px;
+                line-height: 46px;
+            }
+            a {
+                width: 240px;
+                height: 46px;
+                color: #fff;
+                display: block;
+                text-align: center;
+                line-height: 46px;
+                font-size: 16px;
+                text-decoration: none;
+                &:hover {
+                    background: #fff;
+                    color: #016daf;
+                }
+            }
+            .content-left-active {
+                background: #fff;
+                color: #016daf;
+            }
+        }
+
+        /* 左侧导航-路由设置 */
+        .content-left-lysz{
+            height: 92px;
+        }
+        
+        /* 左侧导航-开发者管理 */
+        .content-left-kfzgl{
+            height: 92px;
+        }
+        
+        /* 左侧导航-服务设置 */
+        .content-left-fwsz{
+            height: 138px;
+        }
+        
+        /* 左侧导航-权限设置 */
+        .content-left-qxsz{
+            height: 138px;
+        }
+        
+        /* 左侧导航-限速设置 */
+        .content-left-xssz{
+            height: 92px;
+        }
+
+         /* 左侧导航-新增图表 */
+         .content-left-xssz{
+            height: 92px;
+        }
+        
+    }
+}

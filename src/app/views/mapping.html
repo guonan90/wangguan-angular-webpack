@@ -1,0 +1,83 @@
+<!-- <div class="dizhicaiji">地址采集</div> -->
+<div class="dzcj_content">
+    <div class="common_header">
+        <p>地址采集</p>
+    </div>
+    <div class="dzcj_list">
+        <ol class="clearfix">
+            <li class="lysz_list_allselect">
+                <input type="checkbox" ng-model="selectAll" ng-click="selected(selectAll)" />
+                <span>全选</span>
+            </li>
+            <li>应用</li>
+            <li>服务地址</li>
+            <li>请求方式(HTTP)</li>
+            <li>操作</li>
+        </ol>
+        <div class="dzcj_list_ul">
+            <ul ng-repeat="mapping in mappings" ng-class="{success: $index%2==0, active:$index%2==1}">
+                <!-- <li><input type="checkbox" /></li> -->
+                <li>
+                    <input type="checkbox" ng-model="mapping.check" ng-checked="mapping.check" />
+                </li>
+                <li>{{ mapping.serviceId}}</li>
+                <li>{{mapping.path}}</li>
+                <li>{{mapping.requestMethod}}</li>
+                <li>
+                    <span class="dzcj_list_r" ng-click="editItem(mapping)">
+                        <i class="iconfont iconfont-router">&#xe649;</i>
+                    </span>
+                    <span class="dzcj_list_x" ng-click="deleteMapping(mapping.id)">
+                        <i class="iconfont iconfont-router">&#xe600;</i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <nav id="nav_pagination" aria-label="Page navigation">
+        <ul class="pagination"></ul>
+        <div class="clearfix:after"></div>
+    </nav>
+
+    <div class="common_btn">
+        <button class="btn btn-success dzcj_add_btn" ng-click="addMapping()">增加</button>
+        <button class="btn btn-danger dzcj_remove_btn" ng-click="deleteBatchMapping()">批量删除</button>
+    </div>
+
+
+    <div class="shade"></div>
+    <form name="myForm" >
+
+        <div class="common_popUp dzcj_popUp">
+            <h1>增加地址采集信息</h1>
+            <div class="common_pop_content">
+                <input type="hidden" name="id" ng-model="mapping.id" ng-value="" >
+                <p>路径：</p>
+                <!-- <input type="text" name="" value="" class="dzcj_data_a"/> -->
+                <input ng-model="mapping.path" ng-value="" id="path" name="path" type="text" class="dzcj_data_a" required/>
+                <p>服务名称(id)：</p>
+                <!-- <input type="text" name="" value="" class="dzcj_data_b"/> -->
+                <input ng-model="mapping.serviceId" ng-value="" id="serviceId" name="serviceId" type="text" class="dzcj_data_b" required/>
+                <p>外部地址：</p>
+                <!-- <input type="text" name="" value="" class="dzcj_data_c"/> -->
+                <input ng-model="mapping.outPath" ng-value="" id="outPath" name="outPath" type="text" class="dzcj_data_c" required/>
+                <p>请求方法：</p>
+                <!-- <select name="" id="" class="clgl_data_d">
+                <option>--请选择--</option>
+                <option>POST</option>
+                <option>GET</option>
+            </select> -->
+                <select type="text" class="clgl_data_d" id="requestMethod" name="requestMethod" value="" ng-model="mapping.requestMethod"
+                    ng-options="requestMethod.key as requestMethod.key   for requestMethod in requestMethods" required>
+                    <option value="">-- 请选择 --</option>
+                </select>
+            </div>
+            <div class="common_pop_btn">
+                <button class="btn btn-success dzcj_pop_r" ng-click="save()">提交</button>
+                <button class="btn common_pop_x" ng-click="concel()">取消</button>
+            </div>
+        </div>
+    </form>
+
+</div>

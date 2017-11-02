@@ -1,0 +1,95 @@
+<div class="login">
+    <!-- <span class="login_skip">点我跳转</span> -->
+    <div class="login_img">
+        <h2 class="login_img_h2">智能加密路由网关</h2>
+        <form name="loginform">
+            <div class="login_account">
+                <div class="login_yhm">
+                    <input ng-model="user.loginUsername" required="true" ng-keypress="unamecr($event)" name="loginUsername" type="text" class="form_control"
+                        placeholder="请输入用户名" autofocus/> 
+                    <span ng-show="loginform.loginUsername.$dirty && loginform.loginUsername.$invalid">
+                        <span class="login_yhm_prompting" ng-show="loginform.loginUsername.$error.required"> 请输入用户名</span>
+                    </span>
+                </div>
+                <div class="login_mm">
+                    <input ng-model="user.loginPassword" required="true" ng-keypress="upasscr($event)" name="loginPassword" type="password" class="form_control"
+                        placeholder="请输入密码" />
+                    <span ng-show="loginform.loginPassword.$dirty && loginform.loginPassword.$invalid">
+                        <span class="login_mm_prompting" ng-show="loginform.loginPassword.$error.required"> 请输入密码</span>
+                    </span>
+                </div>
+                <div class="login_btn">
+                    <button class="login_skip" id="loginBtn" ng-click="login()">Sign in</button>
+                    <button type="reset" class="login_reset">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--
+<div class="body">
+    <div class="header"></div>
+    <div class="aside"></div>
+    <div class="content">
+        <div id="content" class="content_init">
+            <div class="clgl_content">
+                <div class="common_header">
+                    <p>策略管理</p>
+                </div>
+                <div class="clgl_list">
+                    <ol class="clearfix">
+                        <li>选择</li>
+                        <li>策略类型</li>
+                        <li>服务地址</li>
+                        <li>账户</li>
+                        <li>源地址</li>
+                        <li>最大访问量</li>
+                        <li>刷新时间间隔</li>
+                        <li>操作</li>
+                    </ol>
+                    <div class="clgl_list_ul">
+                        <ul>
+                            <li><input type="checkbox"/></li>
+                            <li>服务地址</li>
+                            <li>www.baidubaidubaidubaidu.com</li>
+                            <li>wojiaogoudan@163.com</li>
+                            <li>sFgyhjjkmjlu</li>
+                            <li>100</li>
+                            <li>60</li>
+                            <li>
+                                <span class="glyphicon glyphicon-pencil clgl_list_r"></span>
+                                <span class="glyphicon glyphicon-trash clgl_list_x"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="common_btn">
+                    <button class="btn btn-success clgl_add_btn">增加</button>
+                    <button class="btn btn-danger clgl_remove_btn">删除</button>
+                </div>
+                <div class="common_popUp clgl_popUp">
+                    <h1>编辑策略</h1>
+                    <div class="common_pop_content">
+                        <p>策略类型:</p>
+                        <select name="" id="">
+                            <option>&#45;&#45;请选择&#45;&#45;</option>
+                            <option>源地址</option>
+                            <option>用户</option>
+                            <option>服务地址</option>
+                            <option>混合方式</option>
+                        </select>
+                        <p>最大访问量:</p>
+                        <input type="number" name="" value=""/>
+                        <p>最新时间间隔:</p>
+                        <input type="number" name="" value=""/>
+                    </div>
+                    <div class="common_pop_btn">
+                        <button class="btn btn-success clgl_pop_r">提交</button>
+                        <button class="btn common_pop_x">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

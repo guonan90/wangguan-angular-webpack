@@ -1,0 +1,145 @@
+<!-- <div class="shouquanfuwu">授权服务</div> -->
+
+<div class="sqfw_content">
+    <div class="common_header">
+        <p>授权服务</p>
+    </div>
+    <div class="sqfw_message">
+        <p>开发者信息</p>
+        <dl class="sqfw_message_dl">
+            <dd ng-repeat="developer in developers" ng-click="developerNameClick(developer)">{{developer.remark}}</dd>
+
+        </dl>
+    </div>
+    <!--  -->
+    <div class="sqfw_list" ng-hide="selectApp == undefine">
+        <p>[{{selectApp}}] 的授权信息</p>
+        <ol class="clearfix">
+            <li class="lysz_list_allselect">
+                <input type="checkbox" ng-model="selectAll" ng-click="selected(selectAll)" />
+                <span>全选</span>
+            </li>
+            <li>资源名称</li>
+            <li>级别</li>
+            <li>是否启用授权</li>
+            <li>操作</li>
+        </ol>
+        <div class="sqfw_list_ul">
+            <ul  ng-repeat="authority in authoritys" ng-class="{success: $index%2==0, active:$index%2==1}">
+                <li>
+                    <input type="checkbox" ng-model="authority.check" ng-checked="authority.check" />
+                </li>
+                <li>{{authority.resource_name}}</li>
+                <li>{{authority.level}}</li>
+                <li ng-if="authority.authority==1">是</li>
+                <li ng-if="authority.authority==0">否</li>
+                <li>
+
+                    <span class="zygl_list_r" ng-click="authorityDetails(authority.id)">
+                        <i class="iconfont iconfont-router">&#xe607;</i>
+                    </span>
+                    <span class="sqfw_list_r" ng-click="editItem(authority)">
+                        <i class="iconfont iconfont-router">&#xe649;</i>
+                    </span>
+                    <span class="sqfw_list_x" ng-click="deleteAuthority(authority.id)">
+                        <i class="iconfont iconfont-router">&#xe600;</i>
+                    </span>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="sqfw_pager">
+            <!-- <nav id="nav_pagination" aria-label="Page navigation">
+                <ul class="pagination"></ul>
+                <div class="clearfix:after"></div>
+            </nav> -->
+
+            <div class="common_btn">
+                <button class="btn btn-success sqfw_add_btn" ng-click="addAuthority()">增加</button>
+                <button class="btn btn-danger sqfw_remove_btn" ng-click="deleteBatchAuthority()">批量删除</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 点击增加页 -->
+    <div class="shade"></div>
+
+    <div class="common_popUp sqfw_popUp">
+        <form name="authorityForm">
+            <input type="hidden" name="id" ng-model="authority.id" ng-value="">
+
+            <h1>增加授权服务信息</h1>
+
+            <div class="common_pop_content sqfw_content_top" ng-show="showTitle">
+                <div>
+                    <p>资源名称:</p>
+                    <select type="text" class="sqfw_data_a" id="resourceId" name="resourceId" value="" ng-model="authority.resourceId" ng-options="rt.id as rt.resourceName   for rt in resources"
+                        required ng-change="loadTable(authority.resourceId)">
+                        <option value="">-- 请选择 --</option>
+                    </select>
+                    <p>级别:</p>
+                    <input type="number" class="sqfw_data_b" ng-model="authority.level" id="level" required name="level" />
+                    <p>是否授权:</p>
+                    <select name="authority" id="" class="lysz_data_b" ng-model="authority.authority" ng-options="c.key as c.name   for c in CHOOSE"
+                        required>
+                        <option value="">--请选择--</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="modal-body resources_modal-body sqfw_content_bottom" ng-show="showTable">
+                <div class="sqfw_content_bottom_k"></div>
+                <table class="table table-bordered table-hover mapping" auikit-table>
+                    <thead class="sqfw_content_bottom_head">
+                        <tr>
+                            <th class="center">资源名称</th>
+                            <th class="center">服务名称</th>
+                            <th class="center">路径</th>
+                            <th class="center">请求方法</th>
+                            <th class="center">授权类型
+                                <!-- <i class="iconfont iconfont-router">&#xe679;</i> -->
+                                <select type="text" class="sqfw_data_a" id="authorityType" name="authorityType" ng-model="authorityType" ng-options="authorityType.key as authorityType.name   for authorityType in authorityTypes"
+                                    ng-change="changeAuthorityType(authorityType)" ng-show="showTitle">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="sqfw_content_bottom_body">
+                        <tr ng-repeat="resourcesinfo in resourcesinfos">
+                            <td class="center">{{resourcesinfo.resource_name}}</td>
+                            <td class="center">{{resourcesinfo.service_id}}</td>
+                            <td class="center">{{resourcesinfo.path}}</td>
+                            <td class="center">{{resourcesinfo.request_method}}</td>
+                            <td ng-show="showTitle">
+                                <select type="text" class="sqfw_data_a" name="authorityType" required ng-model="resourcesinfo.authority_type" ng-options="authorityType.key as authorityType.name   for authorityType in authorityTypes">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </td>
+                            <td ng-if="!showTitle && (resourcesinfo.authority_type == 'ENCYPT_REQUEST')" class="center">加密请求</td>
+                            <td ng-if="!showTitle && (resourcesinfo.authority_type == 'ENCYPT_RESPONSE')" class="center">加密返回</td>
+                            <td ng-if="!showTitle && (resourcesinfo.authority_type == 'ENCYPT_ALL')" class="center">请求返回都加密</td>
+                            <td ng-if="!showTitle && (resourcesinfo.authority_type == 'ENCYPT_NULL')" class="center">请求返回都不加密</td>
+                            <!-- <td class="center">{{resource.authority_type}}</td> -->
+                        </tr>
+
+                    </tbody>
+                </table>
+                <!-- </div> -->
+                <!-- </div> -->
+            </div>
+
+            <div class="common_pop_btn sqfw_pop_btn">
+                <button class="btn btn-success sqfw_pop_r" ng-click="save()" ng-show="showTitle">提交</button>
+                <button class="btn common_pop_x" ng-click="concel()">取消</button>
+            </div>
+        </form>
+    </div>
+
+
+
+</div>
